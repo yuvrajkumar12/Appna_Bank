@@ -44,10 +44,14 @@ function SignupSigninComponenent() {
           <Button
           text="Sign up with your Google account"
           onClick={() => alert("Signup Clicked!")}/>
-          <p >style={{textAlign:"center"}}or</p>
-          <Button 
-          text="Sinup Using Google" 
-          onClick={() => alert("Signup Clicked!")}/>
+          <p style={{textAlign:"center",margin: 0 }}>or</p>
+
+          <Button
+          text="Sign up with your Google account"
+          onClick={() => alert("Signup Clicked!")} blue={true}/>
+       
+
+         
         </form>
     </div>
   );
