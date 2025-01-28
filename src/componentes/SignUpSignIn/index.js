@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./style.css";
 import Input from "../input";
 import Button from "../Button";
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
-import {auth} from "../../firebase";
+import {createUserWithEmailAndPassword,GoogleAuthProvider,signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {auth,db, provider} from "../../firebase";
+import { doc, setDoc ,getDoc} from "firebase/firestore"; 
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -62,13 +63,37 @@ function SignupSigninComponenent() {
     }
   }
 
-  function createDoc(user){
+  async function createDoc(user){
     //create a Doc.
+    setLoading(true);
+    if(!user) return;
+    const userRef=doc(db, "users", user.uid);
+    const userData=await getDoc(userRef);
+    if(!userData.exists()){
+      try{
+        await setDoc(doc(db, "users", user.uid),
+        {name:user.displayName? user.displayName:name,
+           email:user.email,photoURL:user.photoURL?user.photoURL:"",
+           createdAt:new Date(),
+        });
+        toast.success("Doc created!");
+        setLoading(false);
+      }
+      catch(e){
+        toast.error(e.message);
+        setLoading(false);
+      }
+    } 
+    else{
+      toast.error("Doc already exists");
+      setLoading(false);
+    }
   }
 
   function loginUsingEmail(){
     console.log("Email",email);
     console.log("password",password);
+    setLoading(true);
     if(email!==""&& password!==""){
           signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -76,20 +101,47 @@ function SignupSigninComponenent() {
         const user = userCredential.user;
         toast.success("User Logged In!");
         console.log("User Logged in", user);
+        setLoading(false);
         navigate("/dashboard");
         // ...
       })
       .catch((error) => {
+        setLoading(false);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setLoading(true);
+        toast.error(errorMessage);
+      });
+
+    }else{
+      toast.error("All fields are mandatery!");
+    }
+  }
+
+  function googleAuth(){
+    setLoading(false);
+    try{
+      signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        console.log("user>>>",user);
+        createDoc(user);
+        setLoading(false);
+        navigate("/dashboard");
+        toast.success("User authenticated!");
+      }).catch((error) => {
+        setLoading(false);
         const errorCode = error.code;
         const errorMessage = error.message;
         toast.error(errorMessage);
       });
 
-    }else{
-      toast.error("All fields are mandatery!")
+    }catch(e){
+      setLoading(false);
+      toast.error(e.message);
     }
-    
-
   }
   return (
     <>
@@ -117,7 +169,9 @@ function SignupSigninComponenent() {
           text={loading? "loading...":"Login Using Email and Password"}
           onClick={loginUsingEmail}/>
           <p className="p-login">or</p>
-          <Button text={loading?"Loaging...":"Login Using Google"} blue={true}/>
+          <Button 
+          onClick={googleAuth}
+          text={loading?"Loaging...":"Login Using Google"} blue={true}/>
           <p className="p-login"
           style={{cursor:"pointer"}} onClick={()=>setLoginForm(!loginForm)}>Or Don't Have An Account? Click Here </p>
         </form>
@@ -158,14 +212,14 @@ function SignupSigninComponenent() {
           text={loading? "loading...":"Signup Using Email and Password"}
           onClick={SignupWithEmail}/>
           <p className="p-login">or</p>
-          <Button text={loading?"Loaging...":"Signup Using Google"} blue={true}/>
+          <Button 
+          onClick={googleAuth}
+          text={loading?"Loaging...":"Signup Using Google"} blue={true}/>
           <p className="p-login"style={{cursor:"pointer"}} onClick={()=>setLoginForm(!loginForm)}>Or Have An Account Already? Click Here </p>
         </form>
       </div>
     )}
     </>
   );
-    
 }
-
 export default SignupSigninComponenent
