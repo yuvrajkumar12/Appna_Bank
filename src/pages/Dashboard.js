@@ -1,6 +1,6 @@
-import React from 'react'
-import Header from '../componentes/Header'
-import Cards from '../componentes/Cards'
+import React, { useState } from 'react';
+import Header from '../componentes/Header';
+import Cards from '../componentes/Cards';
 import { Modal } from 'antd';
 
 function Dashboard() {
