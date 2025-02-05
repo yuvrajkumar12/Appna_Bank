@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import Header from '../componentes/Header';
-import Cards from '../componentes/Cards';
-import { Modal } from 'antd';
+import React, { useState } from "react";
+import Header from "../componentes/Header";
+import Cards from "../componentes/Cards";
+import AddExpenseModal from "../componentes/Modals/addExpense";
+import AddIncomeModal from "../componentes/Modals/addIncome";
 
 function Dashboard() {
   const [isExpenseModalVisible, setIsExpenseModalVisible] = useState(false);
@@ -21,16 +22,29 @@ function Dashboard() {
   const handleIncomeCancel = () => {
     setIsIncomeModalVisible(false);
   };
+
+  const onFinish=(values,type )=>{
+    console.log("On Finished",values, type);
+  };
   return (
     <div>
       <Header/>
-      <Cards showExpenseModal={showExpenseModal}
+      <Cards 
+      showExpenseModal={showExpenseModal}
       showIncomeModal={showIncomeModal}
      />
-     <Modal visible={isExpenseModalVisible}>Income</Modal>
-     <Modal visible={isIncomeModalVisible}>Expense</Modal>
+     <AddExpenseModal
+            isExpenseModalVisible={isExpenseModalVisible}
+            handleExpenseCancel={handleExpenseCancel}
+            onFinish={onFinish}
+          />
+          <AddIncomeModal
+            isIncomeModalVisible={isIncomeModalVisible}
+            handleIncomeCancel={handleIncomeCancel}
+            onFinish={onFinish}
+          />
     </div>
-  )
+  );
 }
 
 export default Dashboard;
