@@ -12,17 +12,17 @@ import moment from "moment";
 function Dashboard() {
   const transactions=[
     {
-      type:"income",
-      amount:1200,
-      tag:"salary",
-      name:"income 1",
-      date:"2023-05-23",
+      type: "income",
+      amount: 1200,
+      tag: "salary",
+      name: "income 1",
+      date: "2023-05-23",
     },
     {
-      type:"expanse",
-      amount:800,
-      tag:"food",
-      name:"expense 1",
+      type: "expanse",
+      amount: 800,
+      tag: "food",
+      name: "expense 1",
       date: "2023-05-17",
     },
   ];
@@ -47,7 +47,7 @@ function Dashboard() {
 
   const onFinish=(values,type )=>{
     const newTransaction={
-      type:values.type,
+      type:type,
       date:moment(values.date).format("YYYY-MM-DD"),
       amount: parseFloat(values.amount),
       tag:values.tag,
@@ -57,14 +57,9 @@ function Dashboard() {
   };
 
   async function addTransaction(transaction) {
-    if (!user) {
-      toast.error("User not authenticated!");
-      return;
-    }
-  
     try {
       const docRef = await addDoc(
-        collection(db, `users/${user.uid}/transaction`), 
+        collection(db, `users/${user.uid}/transactions`),
         transaction
       );
       console.log("Document written with ID: ", docRef.id);
@@ -72,6 +67,7 @@ function Dashboard() {
     } catch (e) {
       console.error("Error adding document: ", e);
       toast.error("Couldn't add transaction");
+      
     }
   }
 
