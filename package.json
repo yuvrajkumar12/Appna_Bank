@@ -18143,5 +18143,9 @@
         "url": "https://github.com/sponsors/sindresorhus"
       }
     }
+  },
+  "dependencies": {
+    "build": "^0.1.4",
+    "gh-pages": "^6.3.0"
   }
 }
