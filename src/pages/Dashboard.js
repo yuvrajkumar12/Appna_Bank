@@ -38,7 +38,7 @@ function Dashboard() {
   const onFinish=(values,type )=>{
     const newTransaction={
       type:type,
-      date:moment(values.date).format("YYYY-MM-DD"),
+      date:values.date.format("YYYY-MM-DD"),
       amount: parseFloat(values.amount),
       tag:values.tag,
       name:values.name,
@@ -54,11 +54,10 @@ function Dashboard() {
       );
       console.log("Document written with ID: ", docRef.id);
       toast.success("Transaction Added!");
-      setTransations((prevTransactions) => [...prevTransactions, transaction]);
-      // let newArr=transactions;
-      // newArr.push(transaction);
-      // setTransations(newArr);
-      // calculateBalance();
+      let newArr=transactions;
+      newArr.push(transaction);
+      setTransations(newArr);
+      calculateBalance();
     } catch (e) {
       console.error("Error adding document: ", e);
       toast.error("Couldn't add transaction");
@@ -67,7 +66,7 @@ function Dashboard() {
   }
   useEffect(()=>{
     fetchTransactions();
-  },[]);
+  },[user]);
 
   useEffect(()=>{
     calculateBalance();
