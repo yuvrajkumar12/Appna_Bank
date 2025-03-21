@@ -117,7 +117,6 @@ function SignupSigninComponenent() {
       toast.error("All fields are mandatery!");
     }
   }
-
   function googleAuth(){
     setLoading(false);
     try{

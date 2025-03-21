@@ -54,10 +54,11 @@ function Dashboard() {
       );
       console.log("Document written with ID: ", docRef.id);
       toast.success("Transaction Added!");
-      let newArr=transactions;
-      newArr.push(transaction);
-      setTransations(newArr);
-      calculateBalance();
+      setTransations((prevTransactions) => [...prevTransactions, transaction]);
+      // let newArr=transactions;
+      // newArr.push(transaction);
+      // setTransations(newArr);
+      // calculateBalance();
     } catch (e) {
       console.error("Error adding document: ", e);
       toast.error("Couldn't add transaction");
