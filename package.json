@@ -1,9 +1,12 @@
 {
+  "homepage": "https://github.com/yuvrajkumar12/Appna_Bank",
   "name": "appna_bank",
   "version": "1.0.0",
   "description": "",
   "private": true,
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
