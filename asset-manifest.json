@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/yuvrajkumar12/Appna_Bank/static/css/main.e7c438ff.css",
+    "main.js": "/yuvrajkumar12/Appna_Bank/static/js/main.ec7255b1.js",
+    "index.html": "/yuvrajkumar12/Appna_Bank/index.html",
+    "main.e7c438ff.css.map": "/yuvrajkumar12/Appna_Bank/static/css/main.e7c438ff.css.map",
+    "main.ec7255b1.js.map": "/yuvrajkumar12/Appna_Bank/static/js/main.ec7255b1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e7c438ff.css",
+    "static/js/main.ec7255b1.js"
+  ]
+}
