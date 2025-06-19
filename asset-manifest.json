@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Appna_Bank/static/css/main.5f331637.css",
-    "main.js": "/Appna_Bank/static/js/main.03ed9b47.js",
+    "main.css": "/Appna_Bank/static/css/main.e7c438ff.css",
+    "main.js": "/Appna_Bank/static/js/main.fcee3ea5.js",
     "index.html": "/Appna_Bank/index.html",
-    "main.5f331637.css.map": "/Appna_Bank/static/css/main.5f331637.css.map",
-    "main.03ed9b47.js.map": "/Appna_Bank/static/js/main.03ed9b47.js.map"
+    "main.e7c438ff.css.map": "/Appna_Bank/static/css/main.e7c438ff.css.map",
+    "main.fcee3ea5.js.map": "/Appna_Bank/static/js/main.fcee3ea5.js.map"
   },
   "entrypoints": [
-    "static/css/main.5f331637.css",
-    "static/js/main.03ed9b47.js"
+    "static/css/main.e7c438ff.css",
+    "static/js/main.fcee3ea5.js"
   ]
 }
