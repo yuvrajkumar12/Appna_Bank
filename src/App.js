@@ -32,7 +32,7 @@ function App() {
   return (
     <>
       <ToastContainer />
-      <Router basename="/Appna_Bank">
+      <Router>
         <Routes>
           <Route path="/" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
