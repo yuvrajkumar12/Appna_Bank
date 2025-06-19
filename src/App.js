@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <ToastContainer/>
-        <Router>
+        <Router basename="/Appna_Bank">
           <Routes>
             <Route path="/" element={<Signup />} />
             <Route path="/dashboard" element={<Dashboard />} />
