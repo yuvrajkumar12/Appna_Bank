@@ -11,7 +11,7 @@ function App() {
       <ToastContainer/>
         <Router basename="/Appna_Bank">
           <Routes>
-            <Route path="/" element={<Signup />} />
+            <Route path="/Appna_Bank/" element={<Signup />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </Router>
